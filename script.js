@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.getElementById('mobile-menu');
     const navUl = document.querySelector('nav ul');
 
-    // Mobile Hamburger Menu Toggle
+    // Mobile Hamburger Toggle
     if (mobileMenuBtn) {
         mobileMenuBtn.addEventListener('click', () => {
             navUl.classList.toggle('active');
@@ -29,39 +29,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    const showSection = (targetId) => {
+    // Scroll spy updates active link based on current scroll position
+    window.addEventListener('scroll', () => {
+        let current = '';
         sections.forEach(section => {
-            if (`#${section.id}` === targetId) {
-                section.classList.add('active-section');
-            } else {
-                section.classList.remove('active-section');
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 120) {
+                current = `#${section.getAttribute('id')}`;
             }
         });
-        setActiveLink(targetId);
-    };
+        if (current) setActiveLink(current);
+    });
 
-    // Initialize home section as active
-    showSection('#home');
-
-    // Pop-up navigation handler
+    // Smooth scroll navigation click handler
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('href');
+            const targetSec = document.querySelector(targetId);
 
             // Close mobile menu if open
             if (navUl.classList.contains('active')) {
                 navUl.classList.remove('active');
                 const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
+                if (icon) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
             }
 
-            showSection(targetId);
+            if (targetSec) {
+                targetSec.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
 
-    // Lightbox & Navigation State
+    // Lightbox & Modal Navigation
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const modalCaption = document.getElementById('modalCaption');
@@ -70,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentImageGroup = [];
     let currentImageIndex = 0;
 
-    // Create Navigation Arrow Buttons dynamically inside Modal
     const prevArrow = document.createElement('button');
     prevArrow.className = 'modal-arrow prev';
     prevArrow.innerHTML = '&#10094;';
@@ -89,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
         modalImg.alt = currentImg.alt;
         modalCaption.textContent = currentImg.alt || 'Visual Documentation';
 
-        // Toggle arrow visibility if group has 1 image vs multiple
         if (currentImageGroup.length <= 1) {
             prevArrow.style.display = 'none';
             nextArrow.style.display = 'none';
@@ -109,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateModalContent();
     };
 
-    // Attach click triggers to certificate and document gallery images
     const containers = document.querySelectorAll('.cert-grid, .doc-card, .doc-gallery-section');
 
     containers.forEach(container => {
@@ -124,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Arrow event listeners
     prevArrow.addEventListener('click', (e) => {
         e.stopPropagation();
         navigateImage('prev');
@@ -149,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Keyboard support (Left / Right / Escape)
     document.addEventListener('keydown', (e) => {
         if (modal.style.display === 'flex') {
             if (e.key === 'ArrowLeft') {
