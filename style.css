@@ -442,7 +442,7 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.92);
     justify-content: center;
     align-items: center;
     padding: 1rem;
@@ -452,14 +452,14 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 85%;
-    max-height: 85%;
+    max-width: 80%;
+    max-height: 80%;
     position: relative;
 }
 
 .modal-content {
     max-width: 100%;
-    max-height: 75vh;
+    max-height: 70vh;
     border-radius: 8px;
     border: 1px solid #4a4a4a;
     object-fit: contain;
@@ -475,11 +475,11 @@ section {
 .close-btn {
     position: absolute;
     top: 20px;
-    right: 35px;
+    right: 25px;
     color: #fff;
-    font-size: 40px;
+    font-size: 36px;
     cursor: pointer;
-    z-index: 2001;
+    z-index: 2002;
     user-select: none;
 }
 
@@ -487,12 +487,12 @@ section {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(35, 35, 35, 0.7);
+    background: rgba(20, 20, 20, 0.85);
     color: #ffffff;
-    border: 1px solid #555555;
-    font-size: 2.2rem;
-    width: 50px;
-    height: 50px;
+    border: 1px solid #666666;
+    font-size: 2rem;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -505,7 +505,7 @@ section {
 }
 
 .modal-arrow:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.3);
     border-color: #ffffff;
 }
 
@@ -589,6 +589,21 @@ section {
         grid-template-columns: 1fr;
     }
 
+    /* Modal Mobile Lightbox Adjustments */
+    .modal {
+        padding: 0.5rem;
+    }
+
+    .modal-box {
+        max-width: 100%;
+        max-height: 60vh;
+        margin-bottom: 70px;
+    }
+
+    .modal-content {
+        max-height: 55vh;
+    }
+
     .close-btn {
         top: 15px;
         right: 20px;
@@ -596,13 +611,27 @@ section {
     }
 
     .modal-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 1.6rem;
+        top: auto;
+        bottom: 20px;
+        transform: none;
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        background: rgba(45, 45, 45, 0.95);
+        border-color: #777777;
     }
 
-    .modal-arrow.prev { left: 10px; }
-    .modal-arrow.next { right: 10px; }
+    .modal-arrow:active {
+        transform: scale(0.92);
+    }
+
+    .modal-arrow.prev { 
+        left: 25%; 
+    }
+    
+    .modal-arrow.next { 
+        right: 25%; 
+    }
 }
 
 @media (max-width: 480px) {
@@ -617,5 +646,13 @@ section {
     .img-container {
         width: 180px;
         height: 180px;
+    }
+
+    .modal-arrow.prev { 
+        left: 20%; 
+    }
+    
+    .modal-arrow.next { 
+        right: 20%; 
     }
 }
