@@ -91,22 +91,37 @@ document.addEventListener('DOMContentLoaded', () => {
         modalImg.alt = currentImg.alt;
         modalCaption.textContent = currentImg.alt || 'Visual Documentation';
 
+        // Single image case: hide both arrows
         if (currentImageGroup.length <= 1) {
             prevArrow.style.display = 'none';
             nextArrow.style.display = 'none';
+            return;
+        }
+
+        // Hide previous arrow if at the beginning of the gallery
+        if (currentImageIndex === 0) {
+            prevArrow.style.display = 'none';
         } else {
             prevArrow.style.display = 'flex';
+        }
+
+        // Hide next arrow if at the end of the gallery
+        if (currentImageIndex === currentImageGroup.length - 1) {
+            nextArrow.style.display = 'none';
+        } else {
             nextArrow.style.display = 'flex';
         }
     };
 
     const navigateImage = (direction) => {
         if (!currentImageGroup.length) return;
-        if (direction === 'prev') {
-            currentImageIndex = (currentImageIndex - 1 + currentImageGroup.length) % currentImageGroup.length;
-        } else if (direction === 'next') {
-            currentImageIndex = (currentImageIndex + 1) % currentImageGroup.length;
+
+        if (direction === 'prev' && currentImageIndex > 0) {
+            currentImageIndex--;
+        } else if (direction === 'next' && currentImageIndex < currentImageGroup.length - 1) {
+            currentImageIndex++;
         }
+
         updateModalContent();
     };
 
