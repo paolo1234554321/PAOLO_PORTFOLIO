@@ -38,6 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 current = `#${section.getAttribute('id')}`;
             }
         });
+        // At the very bottom of the page, highlight the last section (it may be too short to reach the scroll threshold)
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+            current = `#${sections[sections.length - 1].getAttribute('id')}`;
+        }
         if (current) setActiveLink(current);
     });
 
@@ -174,4 +178,53 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    // Contact form: delivers messages to my Gmail through Web3Forms
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        const submitBtn = document.getElementById('contact-submit');
+        const btnLabel = submitBtn.querySelector('span');
+        const statusEl = document.getElementById('form-status');
+
+        const showStatus = (message, type) => {
+            statusEl.textContent = message;
+            statusEl.className = type ? `form-status ${type}` : 'form-status';
+        };
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const data = Object.fromEntries(new FormData(contactForm).entries());
+
+            if (data.access_key === 'YOUR_ACCESS_KEY_HERE') {
+                showStatus('The form is not set up yet: the access key is missing in index.html.', 'error');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            btnLabel.textContent = 'Sending...';
+            showStatus('', '');
+
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    showStatus('Message sent. I will reply to your email soon.', 'success');
+                    contactForm.reset();
+                } else {
+                    showStatus('Message not sent. Try again, or email me directly.', 'error');
+                }
+            } catch (error) {
+                showStatus('Message not sent. Check your connection and try again.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                btnLabel.textContent = 'Send message';
+            }
+        });
+    }
 });

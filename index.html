@@ -23,6 +23,7 @@
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#certificates">Certificates</a></li>
                 <li><a href="#work-docs">Work Photos</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -97,31 +98,31 @@
                     <div class="skill-card">
                         <span>Data Entry</span>
                     </div>
-                     <div class="skill-card">
+                    <div class="skill-card">
                         <span>Data Management</span>
                     </div>
-                     <div class="skill-card">
+                    <div class="skill-card">
                         <span>Google Sheets</span>
                     </div>
-                     <div class="skill-card">
+                    <div class="skill-card">
                         <span>Microsoft Excel</span>
                     </div>
-                     <div class="skill-card">
+                    <div class="skill-card">
                         <span>Google Word</span>
                     </div>
-                     <div class="skill-card">
+                    <div class="skill-card">
                         <span>Google Drive</span>
                     </div>
-                     <div class="skill-card">
+                    <div class="skill-card">
                         <span>Cloud Collaboration</span>
                     </div>
-                     <div class="skill-card">
+                    <div class="skill-card">
                         <span>Gmail</span>
                     </div>
-                     <div class="skill-card">
+                    <div class="skill-card">
                         <span>ChatGPT</span>
                     </div>
-                     <div class="skill-card">
+                    <div class="skill-card">
                         <span>Google Gemini</span>
                     </div>
                     <div class="skill-card">
@@ -139,7 +140,7 @@
                     <div class="skill-card">
                         <span>Adaptable</span>
                     </div>
-                     <div class="skill-card">
+                    <div class="skill-card">
                         <span>Basic Networking</span>
                     </div>
                     <div class="skill-card">
@@ -202,6 +203,8 @@
                 <h2>Work Photos</h2>
                 <div class="docs-grid">
 
+                    <div class="docs-col">
+
                     <!-- Card 1: Graduation -->
                     <div class="doc-card">
                         <div class="doc-info">
@@ -246,7 +249,7 @@
                             <h4>Wi-Fi & Infrastructure Deployment</h4>
                             <p>On-site deployment, router configuration, and access point setup across facilities.</p>
                         </div>
-                        
+
                         <div class="doc-gallery-section">
                             <span class="gallery-label">Access Point Installation</span>
                             <div class="gallery-images">
@@ -275,6 +278,10 @@
                             </div>
                         </div>
                     </div>
+
+                    </div><!-- end left column -->
+
+                    <div class="docs-col">
 
                     <!-- Card 4: Field & Connectivity Operations -->
                     <div class="doc-card">
@@ -344,7 +351,53 @@
                         </div>
                     </div>
 
+                    </div><!-- end right column -->
+
                 </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="content">
+                <h2>Contact Me</h2>
+                <p class="contact-intro">Have an inquiry or an opportunity to discuss? Send me a message and I will reply to the email address you provide.</p>
+
+                <form id="contact-form" class="contact-form">
+                    <!-- Paste your free Web3Forms access key below (get it at https://web3forms.com) -->
+                    <input type="hidden" name="access_key" value="8229398f-b136-47ed-bb9d-d18f837522e3">
+                    <input type="hidden" name="from_name" value="Portfolio Website">
+                    <!-- Spam trap: real visitors never see or tick this -->
+                    <input type="checkbox" name="botcheck" class="hidden-field" tabindex="-1" autocomplete="off">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-name">Your name</label>
+                            <input type="text" id="contact-name" name="name" required maxlength="100" autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Your email</label>
+                            <input type="email" id="contact-email" name="email" required maxlength="150" autocomplete="email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-subject">Subject</label>
+                        <input type="text" id="contact-subject" name="subject" required maxlength="150">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-message">Message</label>
+                        <textarea id="contact-message" name="message" rows="6" required maxlength="2000"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="contact-submit">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Send message</span>
+                    </button>
+
+                    <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+                </form>
             </div>
         </section>
     </main>
